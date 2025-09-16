@@ -13,20 +13,275 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// User model for authentication
 model User {
   id        String   @id @default(cuid())
   email     String   @unique
   name      String?
+  avatar    String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  // Relations
+  projects  Project[]
+  chats     Chat[]
+  agents    Agent[]
+  workflows Workflow[]
+  sandboxes Sandbox[]
 }
 
-model Post {
+// Project model for organizing development work
+model Project {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  status      ProjectStatus @default(ACTIVE)
+  userId      String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  user     User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  files    File[]
+  chats    Chat[]
+  builds   Build[]
+  sandboxes Sandbox[]
+}
+
+// File model for file management
+model File {
   id        String   @id @default(cuid())
-  title     String
+  name      String
+  path      String
   content   String?
-  published Boolean  @default(false)
-  authorId  String
+  type      FileType @default(FILE)
+  projectId String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  // Relations
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+// Chat model for conversation history
+model Chat {
+  id        String   @id @default(cuid())
+  title     String?
+  projectId String?
+  userId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  user    User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  project Project?   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  messages Message[]
+}
+
+// Message model for individual chat messages
+model Message {
+  id        String     @id @default(cuid())
+  role      MessageRole
+  content   String
+  chatId    String
+  createdAt DateTime   @default(now())
+
+  // Relations
+  chat Chat @relation(fields: [chatId], references: [id], onDelete: Cascade)
+}
+
+// Agent model for AI agents
+model Agent {
+  id          String   @id @default(cuid())
+  name        String
+  description String
+  model       String
+  status      AgentStatus @default(IDLE)
+  instructions String
+  tools       String   // JSON array of tool names
+  userId      String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  user       User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  executions AgentExecution[]
+}
+
+// Agent execution model
+model AgentExecution {
+  id          String           @id @default(cuid())
+  input       String
+  output      String?
+  error       String?
+  status      ExecutionStatus  @default(RUNNING)
+  toolsUsed   String           // JSON array of tool names
+  agentId     String
+  startTime   DateTime         @default(now())
+  endTime     DateTime?
+  createdAt   DateTime         @default(now())
+
+  // Relations
+  agent Agent @relation(fields: [agentId], references: [id], onDelete: Cascade)
+}
+
+// Workflow model for automation
+model Workflow {
+  id          String           @id @default(cuid())
+  name        String
+  description String
+  status      WorkflowStatus   @default(DRAFT)
+  definition  String           // JSON workflow definition
+  triggers    String           // JSON trigger configuration
+  schedule    String?          // Cron expression
+  userId      String
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+
+  // Relations
+  user       User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  executions WorkflowExecution[]
+}
+
+// Workflow execution model
+model WorkflowExecution {
+  id          String           @id @default(cuid())
+  status      ExecutionStatus  @default(RUNNING)
+  trigger     String
+  results     String           // JSON execution results
+  workflowId  String
+  startTime   DateTime         @default(now())
+  endTime     DateTime?
+  createdAt   DateTime         @default(now())
+
+  // Relations
+  workflow Workflow @relation(fields: [workflowId], references: [id], onDelete: Cascade)
+}
+
+// Sandbox model for development environments
+model Sandbox {
+  id          String       @id @default(cuid())
+  name        String
+  type        SandboxType
+  status      SandboxStatus @default(CREATING)
+  config      String       // JSON configuration
+  environment String       // JSON environment variables
+  port        Int?
+  userId      String
+  projectId   String?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  // Relations
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  project Project? @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  files   SandboxFile[]
+  executions SandboxExecution[]
+}
+
+// Sandbox file model
+model SandboxFile {
+  id        String   @id @default(cuid())
+  path      String
+  content   String
+  sandboxId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  sandbox Sandbox @relation(fields: [sandboxId], references: [id], onDelete: Cascade)
+}
+
+// Sandbox execution model
+model SandboxExecution {
+  id          String           @id @default(cuid())
+  code        String
+  language    String
+  output      String?
+  error       String?
+  status      ExecutionStatus  @default(RUNNING)
+  sandboxId   String
+  startTime   DateTime         @default(now())
+  endTime     DateTime?
+  createdAt   DateTime         @default(now())
+
+  // Relations
+  sandbox Sandbox @relation(fields: [sandboxId], references: [id], onDelete: Cascade)
+}
+
+// Build model for build history
+model Build {
+  id          String       @id @default(cuid())
+  status      BuildStatus  @default(PENDING)
+  config      String       // JSON build configuration
+  output      String?
+  error       String?
+  projectId   String
+  startTime   DateTime     @default(now())
+  endTime     DateTime?
+  createdAt   DateTime     @default(now())
+
+  // Relations
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+// Enums
+enum ProjectStatus {
+  ACTIVE
+  ARCHIVED
+  DELETED
+}
+
+enum FileType {
+  FILE
+  FOLDER
+}
+
+enum MessageRole {
+  USER
+  ASSISTANT
+  SYSTEM
+}
+
+enum AgentStatus {
+  IDLE
+  RUNNING
+  PAUSED
+  ERROR
+}
+
+enum WorkflowStatus {
+  DRAFT
+  ACTIVE
+  PAUSED
+  ERROR
+}
+
+enum SandboxType {
+  NODE
+  PYTHON
+  BASH
+  DOCKER
+}
+
+enum SandboxStatus {
+  CREATING
+  RUNNING
+  STOPPED
+  ERROR
+}
+
+enum ExecutionStatus {
+  RUNNING
+  COMPLETED
+  FAILED
+  CANCELLED
+}
+
+enum BuildStatus {
+  PENDING
+  RUNNING
+  SUCCESS
+  FAILED
+  CANCELLED
 }
