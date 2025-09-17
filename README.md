@@ -1,141 +1,283 @@
-# 🚀 Welcome to Z.ai Code Scaffold
+# AI Development Automation Platform
 
-A modern, production-ready web application scaffold powered by cutting-edge technologies, designed to accelerate your development with [Z.ai](https://chat.z.ai)'s AI-powered coding assistance.
+A comprehensive web application for automating software development tasks using AI. Built with Next.js, TypeScript, and integrated with Chutes AI API.
 
-## ✨ Technology Stack
+## Features
 
-This scaffold provides a robust foundation built with:
+### 🤖 AI-Powered Development
+- **Chat Interface**: Conversational AI assistant with multiple model support
+- **Code Generation**: Generate code snippets, components, and full applications
+- **Code Review**: Automated code analysis and improvement suggestions
+- **Documentation**: Generate comprehensive documentation automatically
 
-### 🎯 Core Framework
-- **⚡ Next.js 15** - The React framework for production with App Router
-- **📘 TypeScript 5** - Type-safe JavaScript for better developer experience
-- **🎨 Tailwind CSS 4** - Utility-first CSS framework for rapid UI development
+### 📁 File Management
+- **File Explorer**: Tree-view file browser with CRUD operations
+- **Real-time Updates**: Live file synchronization
+- **Multi-format Support**: Handle various file types and formats
+- **Search & Filter**: Quick file search and filtering capabilities
 
-### 🧩 UI Components & Styling
-- **🧩 shadcn/ui** - High-quality, accessible components built on Radix UI
-- **🎯 Lucide React** - Beautiful & consistent icon library
-- **🌈 Framer Motion** - Production-ready motion library for React
-- **🎨 Next Themes** - Perfect dark mode in 2 lines of code
+### 🧪 Sandbox Environment
+- **Isolated Environments**: Create and manage development sandboxes
+- **Multiple Runtimes**: Support for Node.js, Python, Bash, and Docker
+- **Code Execution**: Run and test code in safe environments
+- **Resource Management**: Monitor and control sandbox resources
 
-### 📋 Forms & Validation
-- **🎣 React Hook Form** - Performant forms with easy validation
-- **✅ Zod** - TypeScript-first schema validation
+### 🤖 AI Agents
+- **Specialized Agents**: Pre-configured agents for specific tasks
+- **Tool Integration**: Agents with access to various development tools
+- **Custom Agents**: Create and configure custom AI agents
+- **Execution History**: Track agent performance and results
 
-### 🔄 State Management & Data Fetching
-- **🐻 Zustand** - Simple, scalable state management
-- **🔄 TanStack Query** - Powerful data synchronization for React
-- **🌐 Axios** - Promise-based HTTP client
+### ⚡ Automation Workflows
+- **Visual Workflow Builder**: Drag-and-drop workflow creation
+- **Pre-built Templates**: Ready-to-use automation templates
+- **Trigger System**: Manual, scheduled, and event-based triggers
+- **Monitoring**: Real-time workflow execution monitoring
 
-### 🗄️ Database & Backend
-- **🗄️ Prisma** - Next-generation Node.js and TypeScript ORM
-- **🔐 NextAuth.js** - Complete open-source authentication solution
+### 📊 Preview & Testing
+- **Live Preview**: Real-time output preview
+- **Terminal Integration**: Built-in terminal for command execution
+- **Testing Framework**: Automated testing and validation
+- **Deployment Options**: One-click deployment to various platforms
 
-### 🎨 Advanced UI Features
-- **📊 TanStack Table** - Headless UI for building tables and datagrids
-- **🖱️ DND Kit** - Modern drag and drop toolkit for React
-- **📊 Recharts** - Redefined chart library built with React and D3
-- **🖼️ Sharp** - High performance image processing
+## Technology Stack
 
-### 🌍 Internationalization & Utilities
-- **🌍 Next Intl** - Internationalization library for Next.js
-- **📅 Date-fns** - Modern JavaScript date utility library
-- **🪝 ReactUse** - Collection of essential React hooks for modern development
+### Frontend
+- **Next.js 15** with App Router
+- **TypeScript** for type safety
+- **Tailwind CSS** for styling
+- **shadcn/ui** component library
+- **Framer Motion** for animations
+- **Zustand** for state management
 
-## 🎯 Why This Scaffold?
+### Backend
+- **Next.js API Routes** for serverless functions
+- **Prisma ORM** with SQLite database
+- **Socket.IO** for real-time communication
+- **Chutes AI API** for AI capabilities
 
-- **🏎️ Fast Development** - Pre-configured tooling and best practices
-- **🎨 Beautiful UI** - Complete shadcn/ui component library with advanced interactions
-- **🔒 Type Safety** - Full TypeScript configuration with Zod validation
-- **📱 Responsive** - Mobile-first design principles with smooth animations
-- **🗄️ Database Ready** - Prisma ORM configured for rapid backend development
-- **🔐 Auth Included** - NextAuth.js for secure authentication flows
-- **📊 Data Visualization** - Charts, tables, and drag-and-drop functionality
-- **🌍 i18n Ready** - Multi-language support with Next Intl
-- **🚀 Production Ready** - Optimized build and deployment settings
-- **🤖 AI-Friendly** - Structured codebase perfect for AI assistance
+### Development Tools
+- **ESLint** for code quality
+- **Prettier** for code formatting
+- **Husky** for git hooks
+- **GitHub Actions** for CI/CD
 
-## 🚀 Quick Start
+## Getting Started
 
-```bash
-# Install dependencies
-npm install
+### Prerequisites
+- Node.js 18+ 
+- npm or yarn
+- Git
 
-# Start development server
-npm run dev
+### Installation
 
-# Build for production
-npm run build
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/prprojectbase/ai-development-automation.git
+   cd ai-development-automation
+   ```
 
-# Start production server
-npm start
-```
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-Open [http://localhost:3000](http://localhost:3000) to see your application running.
+3. **Set up environment variables**
+   ```bash
+   cp .env.example .env.local
+   ```
+   
+   Edit `.env.local` and add your Chutes AI API key:
+   ```env
+   CHUTES_API_KEY=your_api_key_here
+   DATABASE_URL="file:./dev.db"
+   ```
 
-## 🤖 Powered by Z.ai
+4. **Set up the database**
+   ```bash
+   npm run db:push
+   npm run db:generate
+   ```
 
-This scaffold is optimized for use with [Z.ai](https://chat.z.ai) - your AI assistant for:
+5. **Run the development server**
+   ```bash
+   npm run dev
+   ```
 
-- **💻 Code Generation** - Generate components, pages, and features instantly
-- **🎨 UI Development** - Create beautiful interfaces with AI assistance  
-- **🔧 Bug Fixing** - Identify and resolve issues with intelligent suggestions
-- **📝 Documentation** - Auto-generate comprehensive documentation
-- **🚀 Optimization** - Performance improvements and best practices
+6. **Open your browser**
+   Navigate to [http://localhost:3000](http://localhost:3000)
 
-Ready to build something amazing? Start chatting with Z.ai at [chat.z.ai](https://chat.z.ai) and experience the future of AI-powered development!
+## Available AI Models
 
-## 📁 Project Structure
+The platform supports multiple AI models through Chutes AI:
+
+- **DeepSeek V3.1** - Advanced reasoning and coding
+- **LongCat Flash** - Fast and efficient general tasks
+- **Qwen3 235B** - Large model with thinking capabilities
+- **Qwen3 Coder 480B** - Specialized for programming
+- **Qwen3 Next 80B** - Advanced thinking model
+- **K2 Think** - Optimized for complex reasoning
+- **GLM 4.5** - General language model
+- **GPT OSS 120B** - Open source GPT variant
+- **Hermes 4 405B** - Instruction following
+- **DeepSeek R1** - Reasoning optimized
+- **Kimi K2** - Strong instruction performance
+- **OpenHands LM 32B** - Agent task optimization
+- **UIGEN X 32B** - UI generation specialized
+
+## Project Structure
 
 ```
 src/
-├── app/                 # Next.js App Router pages
-├── components/          # Reusable React components
-│   └── ui/             # shadcn/ui components
-├── hooks/              # Custom React hooks
-└── lib/                # Utility functions and configurations
+├── app/                    # Next.js App Router
+│   ├── api/               # API routes
+│   │   ├── chat/          # Chat completions
+│   │   ├── models/        # Model management
+│   │   ├── sandbox/       # Sandbox operations
+│   │   └── tools/         # Tool execution
+│   ├── globals.css        # Global styles
+│   ├── layout.tsx         # Root layout
+│   └── page.tsx           # Home page
+├── components/            # React components
+│   ├── ui/               # shadcn/ui components
+│   ├── agent-manager.tsx  # AI agent management
+│   ├── automation-manager.tsx # Workflow automation
+│   ├── chat-interface.tsx # Chat interface
+│   ├── file-explorer.tsx  # File browser
+│   ├── preview-panel.tsx  # Output preview
+│   └── sandbox-manager.tsx # Sandbox management
+├── hooks/                # Custom React hooks
+├── lib/                  # Utility libraries
+│   ├── db.ts            # Database client
+│   ├── socket.ts        # WebSocket setup
+│   └── utils.ts         # Helper functions
+└── prisma/               # Database schema
 ```
 
-## 🎨 Available Features & Components
+## API Endpoints
 
-This scaffold includes a comprehensive set of modern web development tools:
+### Chat Completions
+```
+POST /api/chat/completions
+```
+OpenAI-compatible chat completions endpoint with Chutes AI integration.
 
-### 🧩 UI Components (shadcn/ui)
-- **Layout**: Card, Separator, Aspect Ratio, Resizable Panels
-- **Forms**: Input, Textarea, Select, Checkbox, Radio Group, Switch
-- **Feedback**: Alert, Toast (Sonner), Progress, Skeleton
-- **Navigation**: Breadcrumb, Menubar, Navigation Menu, Pagination
-- **Overlay**: Dialog, Sheet, Popover, Tooltip, Hover Card
-- **Data Display**: Badge, Avatar, Calendar
+### Models
+```
+GET /api/models
+```
+List available AI models.
 
-### 📊 Advanced Data Features
-- **Tables**: Powerful data tables with sorting, filtering, pagination (TanStack Table)
-- **Charts**: Beautiful visualizations with Recharts
-- **Forms**: Type-safe forms with React Hook Form + Zod validation
+### Sandbox Management
+```
+POST /api/sandbox          # Create sandbox
+GET /api/sandbox           # List sandboxes
+PUT /api/sandbox/[id]      # Update sandbox
+DELETE /api/sandbox/[id]   # Delete sandbox
+POST /api/sandbox/[id]/execute  # Execute code in sandbox
+```
 
-### 🎨 Interactive Features
-- **Animations**: Smooth micro-interactions with Framer Motion
-- **Drag & Drop**: Modern drag-and-drop functionality with DND Kit
-- **Theme Switching**: Built-in dark/light mode support
+### Tools
+```
+POST /api/tools            # Execute tools
+GET /api/tools             # List available tools
+```
 
-### 🔐 Backend Integration
-- **Authentication**: Ready-to-use auth flows with NextAuth.js
-- **Database**: Type-safe database operations with Prisma
-- **API Client**: HTTP requests with Axios + TanStack Query
-- **State Management**: Simple and scalable with Zustand
+## Testing
 
-### 🌍 Production Features
-- **Internationalization**: Multi-language support with Next Intl
-- **Image Optimization**: Automatic image processing with Sharp
-- **Type Safety**: End-to-end TypeScript with Zod validation
-- **Essential Hooks**: 100+ useful React hooks with ReactUse for common patterns
+### Quick Test
+```bash
+node test-chutes-comprehensive.js --quick
+```
 
-## 🤝 Get Started with Z.ai
+### Comprehensive Test
+```bash
+node test-chutes-comprehensive.js
+```
 
-1. **Clone this scaffold** to jumpstart your project
-2. **Visit [chat.z.ai](https://chat.z.ai)** to access your AI coding assistant
-3. **Start building** with intelligent code generation and assistance
-4. **Deploy with confidence** using the production-ready setup
+### Development Scenarios
+```bash
+node test-software-development.js
+```
+
+## Usage Examples
+
+### Basic Chat
+```javascript
+const response = await fetch('/api/chat/completions', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    messages: [
+      { role: 'system', content: 'You are a helpful assistant.' },
+      { role: 'user', content: 'Create a React component for a button' }
+    ],
+    model: 'qwen3-coder-480b',
+    temperature: 0.7
+  })
+})
+```
+
+### Create Sandbox
+```javascript
+const sandbox = await fetch('/api/sandbox', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    name: 'Development Sandbox',
+    type: 'node'
+  })
+})
+```
+
+### Execute Code
+```javascript
+const result = await fetch(`/api/sandbox/${sandboxId}/execute`, {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    code: 'console.log("Hello, World!")',
+    language: 'javascript'
+  })
+})
+```
+
+## Configuration
+
+### Environment Variables
+- `CHUTES_API_KEY` - Chutes AI API key
+- `DATABASE_URL` - Database connection string
+- `NEXTAUTH_SECRET` - NextAuth secret (for authentication)
+- `NEXTAUTH_URL` - NextAuth URL
+
+### Customization
+- Edit `prisma/schema.prisma` to modify database structure
+- Update `src/components/ui/` to customize UI components
+- Modify `src/lib/` to add utility functions
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Support
+
+For support, please open an issue in the GitHub repository or contact the development team.
+
+## Acknowledgments
+
+- **Chutes AI** for providing the AI API
+- **Next.js** team for the excellent framework
+- **shadcn/ui** for the beautiful component library
+- **Tailwind CSS** for the utility-first CSS framework
 
 ---
 
-Built with ❤️ for the developer community. Supercharged by [Z.ai](https://chat.z.ai) 🚀
+Built with ❤️ using AI and modern web technologies.
