@@ -6,9 +6,10 @@ const sandboxes = new Map<string, any>()
 // POST /api/sandbox/[id]/execute - Execute code in sandbox
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params
     const body = await request.json()
     const { code, language = 'javascript', files = [] } = body
 
@@ -19,7 +20,7 @@ export async function POST(
       )
     }
 
-    const sandbox = sandboxes.get(params.id)
+    const sandbox = sandboxes.get(id)
     
     if (!sandbox) {
       return NextResponse.json(
@@ -115,7 +116,7 @@ export async function POST(
 
     return NextResponse.json({
       execution_id: executionId,
-      sandbox_id: params.id,
+      sandbox_id: id,
       language,
       code: code.substring(0, 100) + (code.length > 100 ? '...' : ''),
       result,
