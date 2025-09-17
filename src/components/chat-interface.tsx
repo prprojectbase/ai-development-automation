@@ -38,19 +38,18 @@ interface ChatInterfaceProps {
 }
 
 const AI_MODELS = [
-  { id: 'deepseek-v3.1', name: 'DeepSeek V3.1' },
-  { id: 'longcat-flash', name: 'LongCat Flash' },
-  { id: 'qwen3-235b', name: 'Qwen3 235B' },
-  { id: 'qwen3-coder-480b', name: 'Qwen3 Coder 480B' },
-  { id: 'qwen3-next-80b', name: 'Qwen3 Next 80B' },
-  { id: 'k2-think', name: 'K2 Think' },
-  { id: 'glm-4.5', name: 'GLM 4.5' },
-  { id: 'gpt-oss-120b', name: 'GPT OSS 120B' },
-  { id: 'hermes-4-405b', name: 'Hermes 4 405B' },
-  { id: 'deepseek-r1', name: 'DeepSeek R1' },
-  { id: 'kimi-k2', name: 'Kimi K2' },
-  { id: 'openhands-lm-32b', name: 'OpenHands LM 32B' },
-  { id: 'uigen-x-32b', name: 'UIGEN X 32B' }
+  { id: 'deepseek-ai/DeepSeek-V3.1', name: 'DeepSeek V3.1' },
+  { id: 'meituan-longcat/LongCat-Flash-Chat-FP8', name: 'LongCat Flash' },
+  { id: 'Qwen/Qwen3-235B-A22B-Thinking-2507', name: 'Qwen3 235B' },
+  { id: 'Qwen/Qwen3-Coder-480B-A35B-Instruct-FP8', name: 'Qwen3 Coder 480B' },
+  { id: 'Qwen/Qwen3-Next-80B-A3B-Thinking', name: 'Qwen3 Next 80B' },
+  { id: 'zai-org/GLM-4.5-FP8', name: 'GLM 4.5' },
+  { id: 'openai/gpt-oss-120b', name: 'GPT OSS 120B' },
+  { id: 'NousResearch/Hermes-4-405B-FP8', name: 'Hermes 4 405B' },
+  { id: 'deepseek-ai/DeepSeek-R1-0528', name: 'DeepSeek R1' },
+  { id: 'moonshotai/Kimi-K2-Instruct-0905', name: 'Kimi K2' },
+  { id: 'all-hands/openhands-lm-32b-v0.1-ep3', name: 'OpenHands LM 32B' },
+  { id: 'Tesslate/UIGEN-X-32B-0727', name: 'UIGEN X 32B' }
 ]
 
 const TOOLS = [
@@ -63,7 +62,7 @@ const TOOLS = [
 export function ChatInterface({ messages, onMessagesChange, onPreviewUpdate }: ChatInterfaceProps) {
   const [input, setInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-  const [selectedModel, setSelectedModel] = useState('qwen3-coder-480b')
+  const [selectedModel, setSelectedModel] = useState('Qwen/Qwen3-Coder-480B-A35B-Instruct-FP8')
   const [enabledTools, setEnabledTools] = useState<string[]>(['file-operations', 'code-execution'])
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
